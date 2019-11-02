@@ -1,7 +1,9 @@
 package psoftProjectBack.psoftProjectBack.entidades;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
+@Entity
 public class Usuario {
 
 	private String nome;
