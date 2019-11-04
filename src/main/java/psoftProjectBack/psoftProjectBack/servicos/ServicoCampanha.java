@@ -24,5 +24,16 @@ public class ServicoCampanha {
 	public Optional<Campanha> recuperaCampanha(String textoDaBusca) {
 		return null;
 	}
+	
+	public String defineNomeCurto(String texto) {
+		
+		String nomeCurto = "";
+		
+		texto = texto.replace(" ", "-");
+		
+		
+		return null;
+		
+	}
 
 }

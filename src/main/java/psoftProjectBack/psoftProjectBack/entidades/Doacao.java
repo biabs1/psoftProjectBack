@@ -2,11 +2,15 @@ package psoftProjectBack.psoftProjectBack.entidades;
 
 import java.util.Date;
 
+import javax.persistence.OneToOne;
+
 public class Doacao {
 
 	private Usuario quemDoou;
 	private double quantiaDoada;
 	private Date dataDaDoacao;
+	@OneToOne
+	private Campanha campanha;
 
 	public Doacao(Usuario quemDoou, double quantiaDoada, Date dataDaDoacao) {
 		super();

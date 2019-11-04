@@ -23,12 +23,12 @@ public class ControladorCampanha {
 		this.servicoCampanha = sCampanha;
 	}
 
-	@PostMapping()
+	@PostMapping("/cadastraCampanha")
 	public ResponseEntity<Campanha> cadastraCampanha(@RequestBody Campanha campanha) {
 		return new ResponseEntity<Campanha>(this.servicoCampanha.cadastraCampanha(campanha), HttpStatus.CREATED);
 	}
 
-	@RequestMapping()
+	@RequestMapping("/buscaCampanha")
 	public ResponseEntity<Campanha> buscarCampanha(String textoDaBusca) {
 
 		Optional<Campanha> campanhaEncontrada = this.servicoCampanha.recuperaCampanha(textoDaBusca);
