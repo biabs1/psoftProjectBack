@@ -1,10 +1,13 @@
 package psoftProjectBack.psoftProjectBack.controladores;
 
+import java.util.Optional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import psoftProjectBack.psoftProjectBack.entidades.Usuario;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
@@ -23,11 +26,16 @@ public class ControladorUsuario {
 	
 	@PostMapping("/usuarios")
     public ResponseEntity<Usuario> addUsuario(@RequestBody Usuario usuario) {
-    	return new ResponseEntity<Usuario>(servicoUsuario.adicionarUsuario(usuario),
-    			HttpStatus.OK);
+		String email = usuario.getEmail();
+		Optional<Usuario> usuarioEncontrado = servicoUsuario.getUsuario(email);
+		
+		if (usuarioEncontrado.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Email ja cadastrado");
+		} else {
+			return new ResponseEntity<Usuario>(servicoUsuario.adicionarUsuario(usuario),
+	    			HttpStatus.CREATED);
+		}
+    	
     }
 	
-	
-	
-
 }
