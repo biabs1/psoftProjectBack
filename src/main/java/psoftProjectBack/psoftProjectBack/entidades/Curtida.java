@@ -5,8 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,16 +17,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Comentario {
+public class Curtida {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@OneToOne
-	private Usuario quemComentou;
-	private String texto;
+	private Usuario quemDeuLike;
 	@OneToOne
-	@JsonIgnore
 	private Campanha campanha; 
-	
+
 }
