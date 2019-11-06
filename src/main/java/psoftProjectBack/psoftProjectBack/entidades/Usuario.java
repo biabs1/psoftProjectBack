@@ -1,10 +1,18 @@
 package psoftProjectBack.psoftProjectBack.entidades;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Usuario {
 
 	private String nome;
@@ -13,19 +21,6 @@ public class Usuario {
 	private String email;
 	private String numCartaoCredito;
 	private String senha;
-	
-	public Usuario() {
-		super();
-	}
-	
-	public Usuario(String nome, String sobrenome, String email,
-			String numCartaoCredito, String senha) {
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.email = email;
-		this.numCartaoCredito = numCartaoCredito;
-		this.senha = senha;
-	}
 	
 	public String getEmail() {
 		return email;
