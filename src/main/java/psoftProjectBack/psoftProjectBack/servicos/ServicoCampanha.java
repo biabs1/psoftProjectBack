@@ -1,6 +1,6 @@
 package psoftProjectBack.psoftProjectBack.servicos;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -21,19 +21,8 @@ public class ServicoCampanha {
 		return this.campanhasDAO.save(campanha);
 	}
 
-	public Optional<Campanha> recuperaCampanha(String textoDaBusca) {
-		return null;
-	}
-	
-	public String defineNomeCurto(String texto) {
-		
-		String nomeCurto = "";
-		
-		texto = texto.replace(" ", "-");
-		
-		
-		return null;
-		
+	public List<Campanha> recuperaCampanha(String textoDaBusca) {
+		return this.campanhasDAO.findByNomeContaining(textoDaBusca);
 	}
 
 }

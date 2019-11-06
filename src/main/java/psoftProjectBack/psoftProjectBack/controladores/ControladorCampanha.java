@@ -1,6 +1,6 @@
 package psoftProjectBack.psoftProjectBack.controladores;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,21 +23,18 @@ public class ControladorCampanha {
 		this.servicoCampanha = sCampanha;
 	}
 
-	@PostMapping("/cadastraCampanha")
+	@PostMapping("/campanha")
 	public ResponseEntity<Campanha> cadastraCampanha(@RequestBody Campanha campanha) {
+		System.out.println(campanha);
 		return new ResponseEntity<Campanha>(this.servicoCampanha.cadastraCampanha(campanha), HttpStatus.CREATED);
 	}
 
-	@RequestMapping("/buscaCampanha")
-	public ResponseEntity<Campanha> buscarCampanha(String textoDaBusca) {
+	@RequestMapping("/campanha")
+	public ResponseEntity<List<Campanha>> buscarCampanha(String textoDaBusca) {
 
-		Optional<Campanha> campanhaEncontrada = this.servicoCampanha.recuperaCampanha(textoDaBusca);
+		List<Campanha> campanhaEncontrada = this.servicoCampanha.recuperaCampanha(textoDaBusca);
 
-		if (campanhaEncontrada.isPresent()) {
-			return new ResponseEntity<Campanha>(campanhaEncontrada.get(), HttpStatus.OK);
-		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Campanha nao encontrada");
-		}
+		return new ResponseEntity<List<Campanha>>(campanhaEncontrada, HttpStatus.OK);
 
 	}
 
