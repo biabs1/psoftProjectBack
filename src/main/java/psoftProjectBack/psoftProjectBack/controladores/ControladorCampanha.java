@@ -30,9 +30,9 @@ public class ControladorCampanha {
 	}
 
 	@RequestMapping("/campanha")
-	public ResponseEntity<List<Campanha>> buscarCampanha(String textoDaBusca) {
+	public ResponseEntity<List<Campanha>> buscarCampanhas(String textoDaBusca) {
 
-		List<Campanha> campanhaEncontrada = this.servicoCampanha.recuperaCampanha(textoDaBusca);
+		List<Campanha> campanhaEncontrada = this.servicoCampanha.recuperaCampanhas(textoDaBusca);
 
 		return new ResponseEntity<List<Campanha>>(campanhaEncontrada, HttpStatus.OK);
 

@@ -21,7 +21,7 @@ public class ServicoCampanha {
 		return this.campanhasDAO.save(campanha);
 	}
 
-	public List<Campanha> recuperaCampanha(String textoDaBusca) {
+	public List<Campanha> recuperaCampanhas(String textoDaBusca) {
 		return this.campanhasDAO.findByNomeContaining(textoDaBusca);
 	}
 
