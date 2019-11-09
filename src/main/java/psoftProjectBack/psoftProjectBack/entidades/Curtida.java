@@ -5,26 +5,51 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Curtida {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@OneToOne
 	private Usuario quemDeuLike;
 	@OneToOne
-	private Campanha campanha; 
+	private Campanha campanha;
+
+	public Curtida() {
+		super();
+	}
+
+	public Curtida(int id, Usuario quemDeuLike, Campanha campanha) {
+		super();
+		this.id = id;
+		this.quemDeuLike = quemDeuLike;
+		this.campanha = campanha;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Usuario getQuemDeuLike() {
+		return quemDeuLike;
+	}
+
+	public void setQuemDeuLike(Usuario quemDeuLike) {
+		this.quemDeuLike = quemDeuLike;
+	}
+
+	public Campanha getCampanha() {
+		return campanha;
+	}
+
+	public void setCampanha(Campanha campanha) {
+		this.campanha = campanha;
+	}
 
 }

@@ -8,15 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Doacao {
 
@@ -30,11 +21,23 @@ public class Doacao {
 	@OneToOne
 	private Campanha campanha;
 
+	public Doacao() {
+		super();
+	}
+
 	public Doacao(Usuario quemDoou, double quantiaDoada, Date dataDaDoacao) {
 		super();
 		this.quemDoou = quemDoou;
 		this.quantiaDoada = quantiaDoada;
 		this.dataDaDoacao = dataDaDoacao;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Usuario getQuemDoou() {
@@ -59,6 +62,14 @@ public class Doacao {
 
 	public void setDataDaDoacao(Date dataDaDoacao) {
 		this.dataDaDoacao = dataDaDoacao;
+	}
+
+	public Campanha getCampanha() {
+		return campanha;
+	}
+
+	public void setCampanha(Campanha campanha) {
+		this.campanha = campanha;
 	}
 
 }

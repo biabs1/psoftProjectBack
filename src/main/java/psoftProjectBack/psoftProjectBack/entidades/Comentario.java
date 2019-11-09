@@ -13,13 +13,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Comentario {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -28,6 +24,50 @@ public class Comentario {
 	private String texto;
 	@OneToOne
 	@JsonIgnore
-	private Campanha campanha; 
-	
+	private Campanha campanha;
+
+	public Comentario() {
+		super();
+	}
+
+	public Comentario(int id, Usuario quemComentou, String texto, Campanha campanha) {
+		super();
+		this.id = id;
+		this.quemComentou = quemComentou;
+		this.texto = texto;
+		this.campanha = campanha;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Usuario getQuemComentou() {
+		return quemComentou;
+	}
+
+	public void setQuemComentou(Usuario quemComentou) {
+		this.quemComentou = quemComentou;
+	}
+
+	public String getTexto() {
+		return texto;
+	}
+
+	public void setTexto(String texto) {
+		this.texto = texto;
+	}
+
+	public Campanha getCampanha() {
+		return campanha;
+	}
+
+	public void setCampanha(Campanha campanha) {
+		this.campanha = campanha;
+	}
+
 }
