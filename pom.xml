@@ -56,17 +56,10 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-<<<<<<< HEAD
-		<groupId>io.jsonwebtoken</groupId>
-		<artifactId>jjwt</artifactId>
-		<version>0.9.1</version>
-	</dependency>
-=======
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
 		</dependency>
->>>>>>> 4d840869f28398e6d883bda7e272e62c277dcaf9
 	</dependencies>
 
 	<build>
