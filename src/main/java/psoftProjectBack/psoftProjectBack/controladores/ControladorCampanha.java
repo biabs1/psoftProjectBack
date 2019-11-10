@@ -1,9 +1,11 @@
 package psoftProjectBack.psoftProjectBack.controladores;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +37,29 @@ public class ControladorCampanha {
 		List<Campanha> campanhaEncontrada = this.servicoCampanha.recuperaCampanhas(textoDaBusca);
 
 		return new ResponseEntity<List<Campanha>>(campanhaEncontrada, HttpStatus.OK);
+
+	}
+
+	@RequestMapping("/campanha/{id}")
+	public ResponseEntity<Campanha> recuperaCampanha(@PathVariable long id) {
+		Optional<Campanha> campanhaRecuperada = this.servicoCampanha.recuperaCampanha(id);
+		if (campanhaRecuperada.isPresent()) {
+			return new ResponseEntity<Campanha>(campanhaRecuperada.get(), HttpStatus.OK);
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Campanha nao encontrada");
+		}
+
+	}
+
+	@RequestMapping()
+	public ResponseEntity<List<Campanha>> listarTodasAsCampanhas() {
+		return new ResponseEntity<List<Campanha>>(this.servicoCampanha.listaCampanhas(), HttpStatus.OK);
+	}
+
+	@PostMapping("")
+	public ResponseEntity<Campanha> alteraDescricao(@PathVariable long id, String novaDescricao) {
+
+		return new ResponseEntity<Campanha>(this.servicoCampanha.alteraDescricao(id, novaDescricao), HttpStatus.OK);
 
 	}
 
