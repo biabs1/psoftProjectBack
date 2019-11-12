@@ -1,4 +1,4 @@
-package psoftProjectBack.psoftProjectBack;
+package psoftProjectBack.psoftProjectBack.filtros;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

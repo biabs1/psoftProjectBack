@@ -17,7 +17,6 @@ import psoftProjectBack.psoftProjectBack.entidades.Usuario;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoUsuario;
 
-@CrossOrigin(origins = "file:///home/beatriz/Desktop/psoftProjectFront", maxAge = 3600)
 @RestController
 public class ControladorUsuario {
 	
