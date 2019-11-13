@@ -20,14 +20,14 @@ public class ServicoJWT {
 	}
 	
 	public boolean usuarioExiste(String authorizationHeader) throws ServletException {
-		String sujeito = recuperarSujeitoDoToken(authorizationHeader);
-		return servicoUsuario.recuperarUsuario(sujeito).isPresent();
+		String email = recuperarSujeitoDoToken(authorizationHeader);
+		return servicoUsuario.getUsuario(email).isPresent();
 	}
 	
 	public boolean usuarioTemPermissao(String authorizationHeader, String email) throws ServletException {
 		String sujeito = recuperarSujeitoDoToken(authorizationHeader);
 
-		Optional<Usuario> optUsuario = servicoUsuario.recuperarUsuario(sujeito);
+		Optional<Usuario> optUsuario = servicoUsuario.getUsuario(sujeito);
 		return optUsuario.isPresent() && optUsuario.get().getEmail().equals(email);
 	}
 

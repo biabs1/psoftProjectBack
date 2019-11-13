@@ -29,7 +29,7 @@ public class ControladorLogin {
 	
 	@RequestMapping("/login")
 	public LoginResponse autenticar(@RequestBody Usuario usuario) throws ServletException {
-		Optional<Usuario> authUsuario = servicoUsuario.recuperarUsuario(usuario.getEmail());
+		Optional<Usuario> authUsuario = servicoUsuario.getUsuario(usuario.getEmail());
 		
 		if (!authUsuario.isPresent()) {
 			throw new ServletException("Usuario nao encontrado!");

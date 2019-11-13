@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import psoftProjectBack.psoftProjectBack.entidades.Comentario;
+import psoftProjectBack.psoftProjectBack.servicos.ServicoComentario;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoUsuario;
 
 public class ControladorComentario {
 	
+	private ServicoComentario servicoComentario;
 	private ServicoUsuario servicoUsuario;
 	private ServicoJWT servicoJWT;
 
@@ -22,16 +24,17 @@ public class ControladorComentario {
 		this.servicoJWT = servicoJWT;
 	}
 
-	@PostMapping("/auth/usuario/{email}")
+	@PostMapping("/auth/usuario")
 	public ResponseEntity<Comentario> addComentario(@RequestBody Comentario comentario,
-			@PathVariable String email, @RequestHeader("Authorization") String header) {
+			@RequestHeader("Authorization") String header) {
+		String email = comentario.getQuemComentou().getEmail();
 		if (!servicoUsuario.getUsuario(email).isPresent()) {
 			return new ResponseEntity<Comentario>(HttpStatus.NOT_FOUND);
 		}
 		
 		try {
 			if (servicoJWT.usuarioTemPermissao(header, email)) {
-				//return new ResponseEntity<Comentario>()
+				return new ResponseEntity<Comentario>(servicoComentario.adicionarComentario(comentario), HttpStatus.OK);
 			}
 		} catch (Exception e) {
 			return new ResponseEntity<Comentario>(HttpStatus.FORBIDDEN);

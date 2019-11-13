@@ -20,7 +20,9 @@ public class Comentario {
 	@OneToOne
 	@JsonIgnore
 	private Campanha campanha;
-	private Comentario comentatio;
+	@OneToOne
+	@JsonIgnore
+	private Comentario comentario;
 
 	public Comentario() {
 		super();
@@ -32,7 +34,7 @@ public class Comentario {
 		this.quemComentou = quemComentou;
 		this.texto = texto;
 		this.campanha = campanha;
-		this.comentatio = comentario;
+		this.comentario = comentario;
 	}
 
 	public int getId() {
@@ -68,11 +70,11 @@ public class Comentario {
 	}
 
 	public Comentario getComentatio() {
-		return comentatio;
+		return comentario;
 	}
 
-	public void setComentatio(Comentario comentatio) {
-		this.comentatio = comentatio;
+	public void setComentatio(Comentario comentario) {
+		this.comentario = comentario;
 	}
 
 }
