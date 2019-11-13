@@ -20,17 +20,19 @@ public class Comentario {
 	@OneToOne
 	@JsonIgnore
 	private Campanha campanha;
+	private Comentario comentatio;
 
 	public Comentario() {
 		super();
 	}
 
-	public Comentario(int id, Usuario quemComentou, String texto, Campanha campanha) {
+	public Comentario(int id, Usuario quemComentou, String texto, Campanha campanha, Comentario comentario) {
 		super();
 		this.id = id;
 		this.quemComentou = quemComentou;
 		this.texto = texto;
 		this.campanha = campanha;
+		this.comentatio = comentario;
 	}
 
 	public int getId() {
@@ -63,6 +65,14 @@ public class Comentario {
 
 	public void setCampanha(Campanha campanha) {
 		this.campanha = campanha;
+	}
+
+	public Comentario getComentatio() {
+		return comentatio;
+	}
+
+	public void setComentatio(Comentario comentatio) {
+		this.comentatio = comentatio;
 	}
 
 }

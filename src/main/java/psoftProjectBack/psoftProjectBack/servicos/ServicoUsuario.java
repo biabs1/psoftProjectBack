@@ -21,10 +21,6 @@ public class ServicoUsuario {
 		return usuariosDAO.save(usuario);
 	}
 	
-	public Optional<Usuario> recuperarUsuario(String email) {
-		return usuariosDAO.findById(email);
-	}
-
 	public Optional<Usuario> getUsuario(String email) {
 		return this.usuariosDAO.findById(email);
 	}
