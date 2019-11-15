@@ -34,7 +34,8 @@ public class ControladorComentario {
 		
 		try {
 			if (servicoJWT.usuarioTemPermissao(header, email)) {
-				return new ResponseEntity<Comentario>(servicoComentario.adicionarComentario(comentario), HttpStatus.OK);
+				return new ResponseEntity<Comentario>(servicoComentario.adicionarComentario(comentario),
+						HttpStatus.CREATED);
 			}
 		} catch (Exception e) {
 			return new ResponseEntity<Comentario>(HttpStatus.FORBIDDEN);

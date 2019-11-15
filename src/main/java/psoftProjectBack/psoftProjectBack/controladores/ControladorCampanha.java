@@ -8,17 +8,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
+import psoftProjectBack.psoftProjectBack.entidades.Comentario;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoCampanha;
+import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
+import psoftProjectBack.psoftProjectBack.servicos.ServicoUsuario;
 
 @RestController
 public class ControladorCampanha {
 
 	private ServicoCampanha servicoCampanha;
+	private ServicoUsuario servicoUsuario;
+	private ServicoJWT servicoJWT;
 
 	public ControladorCampanha(ServicoCampanha sCampanha) {
 		super();
@@ -26,9 +32,22 @@ public class ControladorCampanha {
 	}
 
 	@PostMapping("/campanha")
-	public ResponseEntity<Campanha> cadastraCampanha(@RequestBody Campanha campanha) {
-		System.out.println(campanha);
-		return new ResponseEntity<Campanha>(this.servicoCampanha.cadastraCampanha(campanha), HttpStatus.CREATED);
+	public ResponseEntity<Campanha> cadastraCampanha(@RequestBody Campanha campanha,
+			@RequestHeader("Authorization") String header) {
+		String email = campanha.getDono().getEmail();
+		if (!servicoUsuario.getUsuario(email).isPresent()) {
+			return new ResponseEntity<Campanha>(HttpStatus.NOT_FOUND);
+		}
+		
+		try {
+			if (servicoJWT.usuarioTemPermissao(header, email)) {
+				return new ResponseEntity<Campanha>(servicoCampanha.cadastraCampanha(campanha),
+						HttpStatus.CREATED);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<Campanha>(HttpStatus.FORBIDDEN);
+		}
+		return new ResponseEntity<Campanha>(HttpStatus.UNAUTHORIZED);
 	}
 
 	@RequestMapping("/campanha")
