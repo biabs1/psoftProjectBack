@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
-import psoftProjectBack.psoftProjectBack.entidades.Comentario;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoCampanha;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoUsuario;

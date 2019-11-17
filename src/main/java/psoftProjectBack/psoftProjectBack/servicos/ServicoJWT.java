@@ -49,7 +49,7 @@ public class ServicoJWT {
 
 		String subject = null;
 		try {
-			subject = Jwts.parser().setSigningKey("login do batman").parseClaimsJws(token).getBody().getSubject();
+			subject = Jwts.parser().setSigningKey("minha_senha").parseClaimsJws(token).getBody().getSubject();
 		} catch (SignatureException e) {
 			throw new ServletException("Token invalido ou expirado!");
 		}
