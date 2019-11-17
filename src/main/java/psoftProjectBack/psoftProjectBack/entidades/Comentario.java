@@ -23,6 +23,7 @@ public class Comentario {
 	@OneToOne
 	@JsonIgnore
 	private Comentario comentario;
+	private boolean apagado;
 
 	public Comentario() {
 		super();
@@ -35,6 +36,23 @@ public class Comentario {
 		this.texto = texto;
 		this.campanha = campanha;
 		this.comentario = comentario;
+		this.apagado = false;
+	}
+
+	public Comentario getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(Comentario comentario) {
+		this.comentario = comentario;
+	}
+
+	public boolean isApagado() {
+		return apagado;
+	}
+
+	public void setApagado(boolean apagado) {
+		this.apagado = apagado;
 	}
 
 	public int getId() {

@@ -22,4 +22,11 @@ public class ServicoComentario {
 		return this.comentariosDAO.findById(id);
 	}
 
+	public Comentario removerComentario(Comentario comentario) {
+		comentario.setApagado(true);
+		return comentario;
+	}
+	
+	
+
 }

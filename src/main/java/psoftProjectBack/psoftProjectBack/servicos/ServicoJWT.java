@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureException;
+import psoftProjectBack.psoftProjectBack.entidades.Comentario;
 import psoftProjectBack.psoftProjectBack.entidades.Usuario;
 
 @Service
@@ -26,9 +27,15 @@ public class ServicoJWT {
 	
 	public boolean usuarioTemPermissao(String authorizationHeader, String email) throws ServletException {
 		String sujeito = recuperarSujeitoDoToken(authorizationHeader);
-
 		Optional<Usuario> optUsuario = servicoUsuario.getUsuario(sujeito);
 		return optUsuario.isPresent() && optUsuario.get().getEmail().equals(email);
+	}
+	
+	public boolean usuarioDonoComentario(String authorizationHeader, Comentario comentario) throws ServletException {
+		String sujeito = recuperarSujeitoDoToken(authorizationHeader);
+		Optional<Usuario> optUsuario = servicoUsuario.getUsuario(sujeito);
+		return optUsuario.get().getEmail().equals(comentario.getQuemComentou().getEmail());
+		
 	}
 
 	private String recuperarSujeitoDoToken(String authorizationHeader) throws ServletException {
