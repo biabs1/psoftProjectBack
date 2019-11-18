@@ -18,7 +18,7 @@ import psoftProjectBack.psoftProjectBack.servicos.ServicoUsuario;
 @RequestMapping("/auth")
 public class ControladorLogin {
 	
-	private final String TOKEN_KEY = "login do batman";
+	private final String TOKEN_KEY = "minha_senha";
 	
 	private ServicoUsuario servicoUsuario;
 	

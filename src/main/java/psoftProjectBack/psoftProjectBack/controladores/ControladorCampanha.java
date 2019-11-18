@@ -3,6 +3,8 @@ package psoftProjectBack.psoftProjectBack.controladores;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.ServletException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,15 +34,15 @@ public class ControladorCampanha {
 
 	@PostMapping("/campanha")
 	public ResponseEntity<Campanha> cadastraCampanha(@RequestBody Campanha campanha,
-			@RequestHeader("Authorization") String header) {
-		String email = campanha.getDono().getEmail();
+			@RequestHeader("Authorization") String header) throws ServletException {
+		String email = servicoJWT.recuperarSujeitoDoToken(header);
 		if (!servicoUsuario.getUsuario(email).isPresent()) {
 			return new ResponseEntity<Campanha>(HttpStatus.NOT_FOUND);
 		}
 		
 		try {
 			if (servicoCampanha.nomeCurtoIgual(campanha))
-				return new ResponseEntity<Campanha>(HttpStatus.BAD_REQUEST);
+				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Nome curto já cadastrado");
 			if (servicoJWT.usuarioTemPermissao(header, email)) {
 				return new ResponseEntity<Campanha>(servicoCampanha.cadastraCampanha(campanha),
 						HttpStatus.CREATED);

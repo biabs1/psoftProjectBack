@@ -38,7 +38,7 @@ public class ServicoJWT {
 		
 	}
 
-	private String recuperarSujeitoDoToken(String authorizationHeader) throws ServletException {
+	public String recuperarSujeitoDoToken(String authorizationHeader) throws ServletException {
 		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
 			throw new ServletException("Token inexistente ou mal formatado!");
 		}
