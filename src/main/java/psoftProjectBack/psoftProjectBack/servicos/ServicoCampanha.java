@@ -22,6 +22,14 @@ public class ServicoCampanha {
 		return this.campanhasDAO.save(campanha);
 	}
 
+	public boolean nomeCurtoIgual(Campanha campanha) {
+		for (Campanha c : campanhasDAO.findAll()) {
+			if (c.getNomeCurto().equals(campanha.getNomeCurto()))
+				return true;
+		}
+		return false;
+	}
+
 	public List<Campanha> recuperaCampanhas(String textoDaBusca) {
 		return this.campanhasDAO.findByNomeContaining(textoDaBusca);
 	}

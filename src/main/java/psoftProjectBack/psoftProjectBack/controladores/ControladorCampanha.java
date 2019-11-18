@@ -39,6 +39,8 @@ public class ControladorCampanha {
 		}
 		
 		try {
+			if (servicoCampanha.nomeCurtoIgual(campanha))
+				return new ResponseEntity<Campanha>(HttpStatus.BAD_REQUEST);
 			if (servicoJWT.usuarioTemPermissao(header, email)) {
 				return new ResponseEntity<Campanha>(servicoCampanha.cadastraCampanha(campanha),
 						HttpStatus.CREATED);
