@@ -24,7 +24,7 @@ public class Campanha {
 	private String nome;
 	private String nomeCurto;
 	private String descricao;
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date deadline;
 	private StatusCampanha status;
 	private double meta;
