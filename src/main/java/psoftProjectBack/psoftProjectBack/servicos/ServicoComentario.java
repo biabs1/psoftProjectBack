@@ -15,7 +15,7 @@ public class ServicoComentario {
 	}
 	
 	public Comentario adicionarComentario(Comentario comentario) {
-		return comentariosDAO.save(comentario);
+		return this.comentariosDAO.save(comentario);
 	}
 	
 	public Optional<Comentario> getComentario(Long id) {

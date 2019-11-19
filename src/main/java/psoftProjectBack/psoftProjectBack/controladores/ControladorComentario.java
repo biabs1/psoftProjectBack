@@ -1,5 +1,7 @@
 package psoftProjectBack.psoftProjectBack.controladores;
 
+import javax.servlet.ServletException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,33 +20,30 @@ public class ControladorComentario {
 	private ServicoUsuario servicoUsuario;
 	private ServicoJWT servicoJWT;
 
-	public ControladorComentario(ServicoComentario sComentario, ServicoUsuario servicoUsuario, ServicoJWT servicoJWT) {
+	public ControladorComentario(ServicoComentario sComentario, ServicoUsuario sUsuario, ServicoJWT sJWT) {
 		super();
 		this.servicoComentario = sComentario; 
-		this.servicoUsuario = servicoUsuario;
-		this.servicoJWT = servicoJWT;
+		this.servicoUsuario = sUsuario;
+		this.servicoJWT = sJWT;
 	}
 
-	@PostMapping("/auth/usuario")
+	@PostMapping("/comentario")
 	public ResponseEntity<Comentario> addComentario(@RequestBody Comentario comentario,
-			@RequestHeader("Authorization") String header) {
-		String email = comentario.getQuemComentou().getEmail();
+			@RequestHeader("Authorization") String header) throws ServletException {
+		
+		String email = servicoJWT.recuperarSujeitoDoToken(header);
 		if (!servicoUsuario.getUsuario(email).isPresent()) {
+			System.out.println("ops");
 			return new ResponseEntity<Comentario>(HttpStatus.NOT_FOUND);
 		}
 		
-		try {
-			if (servicoJWT.usuarioTemPermissao(header, email)) {
-				return new ResponseEntity<Comentario>(servicoComentario.adicionarComentario(comentario),
+		comentario.setQuemComentou(this.servicoUsuario.getUsuario(email).get());
+		
+		return new ResponseEntity<Comentario>(servicoComentario.adicionarComentario(comentario),
 						HttpStatus.CREATED);
-			}
-		} catch (Exception e) {
-			return new ResponseEntity<Comentario>(HttpStatus.FORBIDDEN);
-		}
-		return new ResponseEntity<Comentario>(HttpStatus.UNAUTHORIZED);
 	}
 	
-	@DeleteMapping("/auth/usuario")
+	@DeleteMapping("/comentario/deleta")
 	public ResponseEntity<Comentario> removeComentario(@RequestBody Comentario comentario,
 			@RequestHeader("Authorization") String header) {
 		String email = comentario.getQuemComentou().getEmail();
