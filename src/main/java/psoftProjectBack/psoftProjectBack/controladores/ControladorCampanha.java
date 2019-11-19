@@ -49,35 +49,21 @@ public class ControladorCampanha {
 
 	}
 
-	@RequestMapping("/campanha")
-	public ResponseEntity<List<Campanha>> buscarCampanhas(String textoDaBusca) {
+	@RequestMapping("campanha/allCamp")
+	public ResponseEntity<List<Campanha>> listarCampanhas() {
 
-		List<Campanha> campanhaEncontrada = this.servicoCampanha.recuperaCampanhas(textoDaBusca);
+		List<Campanha> campanhaEncontrada = this.servicoCampanha.listaCampanhas(); 
 
 		return new ResponseEntity<List<Campanha>>(campanhaEncontrada, HttpStatus.OK);
 
 	}
 
-	@RequestMapping("/campanha/{id}")
-	public ResponseEntity<Campanha> recuperaCampanha(@PathVariable long id) {
-		Optional<Campanha> campanhaRecuperada = this.servicoCampanha.recuperaCampanha(id);
-		if (campanhaRecuperada.isPresent()) {
-			return new ResponseEntity<Campanha>(campanhaRecuperada.get(), HttpStatus.OK);
-		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Campanha nao encontrada");
-		}
+	@RequestMapping("/campanha/busca")
+	public ResponseEntity<List<Campanha>> buscarCampanhas(@RequestBody String textoDaBusca) {
 
-	}
+		List<Campanha> campanhaEncontrada = this.servicoCampanha.recuperaCampanhas(textoDaBusca);
 
-	@RequestMapping()
-	public ResponseEntity<List<Campanha>> listarTodasAsCampanhas() {
-		return new ResponseEntity<List<Campanha>>(this.servicoCampanha.listaCampanhas(), HttpStatus.OK);
-	}
-
-	@PostMapping("")
-	public ResponseEntity<Campanha> alteraDescricao(@PathVariable long id, String novaDescricao) {
-
-		return new ResponseEntity<Campanha>(this.servicoCampanha.alteraDescricao(id, novaDescricao), HttpStatus.OK);
+		return new ResponseEntity<List<Campanha>>(campanhaEncontrada, HttpStatus.OK);
 
 	}
 

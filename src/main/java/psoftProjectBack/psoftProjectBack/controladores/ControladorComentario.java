@@ -19,8 +19,9 @@ public class ControladorComentario {
 	private ServicoUsuario servicoUsuario;
 	private ServicoJWT servicoJWT;
 
-	public ControladorComentario(ServicoUsuario servicoUsuario, ServicoJWT servicoJWT) {
+	public ControladorComentario(ServicoComentario sComentario, ServicoUsuario servicoUsuario, ServicoJWT servicoJWT) {
 		super();
+		this.servicoComentario = sComentario; 
 		this.servicoUsuario = servicoUsuario;
 		this.servicoJWT = servicoJWT;
 	}

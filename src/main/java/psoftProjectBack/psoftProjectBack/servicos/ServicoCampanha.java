@@ -34,20 +34,6 @@ public class ServicoCampanha {
 		return this.campanhasDAO.findByNomeContaining(textoDaBusca);
 	}
 
-	public Campanha alteraDescricao(long id, String novaDescricao) {
-		Optional<Campanha> campanha = recuperaCampanha(id);
-		if (campanha.isPresent()) {
-			campanha.get().setDescricao(novaDescricao);
-			return campanha.get();
-		} else {
-			return null;
-		}
-	}
-
-	public Optional<Campanha> recuperaCampanha(long id) {
-		return this.campanhasDAO.findById(id);
-	}
-
 	public List<Campanha> listaCampanhas() {
 		return this.campanhasDAO.findAll();
 	}
