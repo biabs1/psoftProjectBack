@@ -35,22 +35,30 @@ public class ControladorCampanha {
 	@PostMapping("/campanha")
 	public ResponseEntity<Campanha> cadastraCampanha(@RequestBody Campanha campanha,
 			@RequestHeader("Authorization") String header) throws ServletException {
-		String email = servicoJWT.recuperarSujeitoDoToken(header);
-		if (!servicoUsuario.getUsuario(email).isPresent()) {
-			return new ResponseEntity<Campanha>(HttpStatus.NOT_FOUND);
-		}
-		
-		try {
-			if (servicoCampanha.nomeCurtoIgual(campanha))
-				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Nome curto já cadastrado");
-			if (servicoJWT.usuarioTemPermissao(header, email)) {
-				return new ResponseEntity<Campanha>(servicoCampanha.cadastraCampanha(campanha),
-						HttpStatus.CREATED);
-			}
-		} catch (Exception e) {
-			return new ResponseEntity<Campanha>(HttpStatus.FORBIDDEN);
-		}
-		return new ResponseEntity<Campanha>(HttpStatus.UNAUTHORIZED);
+
+		System.out.println("====> " + header);
+
+		System.out.println(servicoJWT.recuperarSujeitoDoToken(header));
+
+		return new ResponseEntity<Campanha>(servicoCampanha.cadastraCampanha(campanha), HttpStatus.CREATED);
+
+//		String email = servicoJWT.recuperarSujeitoDoToken(header);
+//		
+//		if (!servicoUsuario.getUsuario(email).isPresent()) {
+//			return new ResponseEntity<Campanha>(HttpStatus.NOT_FOUND);
+//		}
+//		
+//		try {
+//			if (servicoCampanha.nomeCurtoIgual(campanha))
+//				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Nome curto já cadastrado");
+//			if (servicoJWT.usuarioTemPermissao(header, email)) {
+//				return new ResponseEntity<Campanha>(servicoCampanha.cadastraCampanha(campanha),
+//						HttpStatus.CREATED);
+//			}
+//		} catch (Exception e) {
+//			return new ResponseEntity<Campanha>(HttpStatus.FORBIDDEN);
+//		}
+//		return new ResponseEntity<Campanha>(HttpStatus.UNAUTHORIZED);
 	}
 
 	@RequestMapping("/campanha")
