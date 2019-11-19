@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
+import psoftProjectBack.psoftProjectBack.entidades.Comentario;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoCampanha;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoUsuario;
@@ -37,6 +38,9 @@ public class ControladorCampanha {
 			@RequestHeader("Authorization") String header) throws ServletException {
 
 		String email = servicoJWT.recuperarSujeitoDoToken(header);
+		if (!servicoUsuario.getUsuario(email).isPresent()) {
+			return new ResponseEntity<Campanha>(HttpStatus.NOT_FOUND);
+		}
 
 		campanha.setDono(this.servicoUsuario.getUsuario(email).get());
 
