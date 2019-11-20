@@ -32,8 +32,7 @@ public class ControladorComentario {
 			@RequestHeader("Authorization") String header) throws ServletException {
 		
 		String email = servicoJWT.recuperarSujeitoDoToken(header);
-		if (!servicoUsuario.getUsuario(email).isPresent()) {
-			System.out.println("ops");
+		if (!servicoUsuario.getUsuario(email).isPresent()) {	
 			return new ResponseEntity<Comentario>(HttpStatus.NOT_FOUND);
 		}
 		
