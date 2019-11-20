@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import psoftProjectBack.psoftProjectBack.enumerador.StatusCampanha;
 
@@ -22,6 +23,7 @@ public class Campanha {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String nome;
+	@JsonIgnore
 	private String nomeCurto;
 	private String descricao;
 	@JsonFormat(pattern = "yyyy-MM-dd")

@@ -8,9 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
 
 public interface RepositorioCampanha<T, ID extends Serializable> extends JpaRepository<Campanha, Long> {
-	
+
 	List<Campanha> findByNomeIgnoreCaseContaining(String nome);
-	
-	List<Campanha> findByNomeLike(String nome);
 
 }
