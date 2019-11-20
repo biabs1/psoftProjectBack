@@ -9,11 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
+import psoftProjectBack.psoftProjectBack.enumerador.StatusCampanha;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoCampanha;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoUsuario;
@@ -42,6 +42,7 @@ public class ControladorCampanha {
 		}
 
 		campanha.setDono(this.servicoUsuario.getUsuario(email).get());
+		campanha.setStatus(StatusCampanha.ATIVA);
 
 		if (servicoCampanha.nomeCurtoIgual(campanha))
 			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Nome curto já cadastrado");
