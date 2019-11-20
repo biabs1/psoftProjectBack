@@ -1,10 +1,12 @@
 package psoftProjectBack.psoftProjectBack.servicos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
+import psoftProjectBack.psoftProjectBack.enumerador.StatusCampanha;
 import psoftProjectBack.psoftProjectBack.repositorios.RepositorioCampanha;
 
 @Service
@@ -32,13 +34,23 @@ public class ServicoCampanha {
 	public List<Campanha> recuperaCampanhas(String nome) {
 		return this.campanhasDAO.findByNomeIgnoreCaseContaining(nome);
 	}
-	
+
 	public List<Campanha> recuperaCampanhasLike(String nome) {
-		return this.campanhasDAO.findByNomeLike(nome); 
+		return this.campanhasDAO.findByNomeLike(nome);
 	}
 
 	public List<Campanha> listaCampanhas() {
 		return this.campanhasDAO.findAll();
+	}
+
+	public List<Campanha> recuperarCampanhasAtivas() {
+		List<Campanha> ativas = new ArrayList<>();
+		for (Campanha campanha : ativas) {
+			if (campanha.getStatus().equals(StatusCampanha.ATIVA)) {
+				ativas.add(campanha);
+			}
+		}
+		return ativas;
 	}
 
 }

@@ -52,13 +52,18 @@ public class ControladorCampanha {
 	}
 
 	@PostMapping("/campanha/busca")
-	public ResponseEntity<List<Campanha>> buscarCampanhas(@RequestBody String textoDaBusca,
-			@RequestHeader("Authorization") String header) {
+	public ResponseEntity<List<Campanha>> buscarCampanhas(@RequestBody String textoDaBusca) {
 
 		List<Campanha> campanhaEncontrada = this.servicoCampanha.recuperaCampanhasLike(textoDaBusca);
 
 		return new ResponseEntity<List<Campanha>>(campanhaEncontrada, HttpStatus.OK);
 
+	}
+
+	@PostMapping("/campanha/ativas")
+	public ResponseEntity<List<Campanha>> recuperarCampanhasAtivas() {
+
+		return new ResponseEntity<List<Campanha>>(this.servicoCampanha.recuperarCampanhasAtivas(), HttpStatus.OK);
 	}
 
 }
