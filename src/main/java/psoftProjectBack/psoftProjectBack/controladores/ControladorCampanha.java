@@ -57,9 +57,9 @@ public class ControladorCampanha {
 	public ResponseEntity<List<Campanha>> buscarCampanhas(@RequestParam("nome") String textoDaBusca,
 			@RequestParam("status") String status) {
 
-		List<Campanha> campanhaEncontrada = this.servicoCampanha.recuperaCampanhas(textoDaBusca);
+		List<Campanha> campanhasEncontradas = this.servicoCampanha.recuperaCampanhas(textoDaBusca);
 
-		return new ResponseEntity<List<Campanha>>(campanhaEncontrada, HttpStatus.OK);
+		return new ResponseEntity<List<Campanha>>(campanhasEncontradas, HttpStatus.OK);
 
 	}
 
