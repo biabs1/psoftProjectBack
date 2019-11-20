@@ -54,18 +54,13 @@ public class ControladorCampanha {
 	}
 
 	@GetMapping("/campanha")
-	public ResponseEntity<List<Campanha>> buscarCampanhas(@RequestParam("nome") String textoDaBusca) {
+	public ResponseEntity<List<Campanha>> buscarCampanhas(@RequestParam("nome") String textoDaBusca,
+			@RequestParam("status") String status) {
 
 		List<Campanha> campanhaEncontrada = this.servicoCampanha.recuperaCampanhas(textoDaBusca);
 
 		return new ResponseEntity<List<Campanha>>(campanhaEncontrada, HttpStatus.OK);
 
-	}
-
-	@GetMapping("/campanha")
-	public ResponseEntity<List<Campanha>> recuperarCampanhasAtivas() {
-
-		return new ResponseEntity<List<Campanha>>(this.servicoCampanha.recuperarCampanhasAtivas(), HttpStatus.OK);
 	}
 
 }
