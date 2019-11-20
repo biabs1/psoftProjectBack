@@ -9,6 +9,8 @@ import psoftProjectBack.psoftProjectBack.entidades.Campanha;
 
 public interface RepositorioCampanha<T, ID extends Serializable> extends JpaRepository<Campanha, Long> {
 	
-	List<Campanha> findByNomeContaining(String nome); 
+	List<Campanha> findByNomeIgnoreCaseContaining(String nome);
+	
+	List<Campanha> findByNomeLike(String nome);
 
 }

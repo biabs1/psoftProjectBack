@@ -16,7 +16,7 @@ public class PsoftProjectBackApplication {
 		FilterRegistrationBean<FiltroToken> filterRB = new FilterRegistrationBean<FiltroToken>();
 
 		filterRB.setFilter(new FiltroToken());
-		filterRB.addUrlPatterns("/campanha/*");
+		filterRB.addUrlPatterns("/campanha", "/usuario");
 		return filterRB;
 
 	}

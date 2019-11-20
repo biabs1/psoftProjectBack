@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import psoftProjectBack.psoftProjectBack.entidades.Comentario;
 import psoftProjectBack.psoftProjectBack.entidades.Usuario;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoUsuario;
@@ -35,7 +34,7 @@ public class ControladorUsuario {
 		this.servicoJWT = servicoJWT;
 	}
 	
-	@PostMapping("/usuarios")
+	@PostMapping("/usuario")
     public ResponseEntity<Usuario> addUsuario(@RequestBody Usuario usuario) {
 		String email = usuario.getEmail();
 		Optional<Usuario> usuarioEncontrado = servicoUsuario.getUsuario(email);
@@ -62,13 +61,14 @@ public class ControladorUsuario {
 
     }
 	
-	@GetMapping("/usuarios")
+	@GetMapping("/usuario")
 	public ResponseEntity<Usuario> getUsuario(@RequestHeader("Authorization") String header) throws ServletException {
 		String email = servicoJWT.recuperarSujeitoDoToken(header);
 		if (!servicoUsuario.getUsuario(email).isPresent()) {
 			return new ResponseEntity<Usuario>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Usuario>(servicoUsuario.getUsuario(email),  HttpStatus.OK);	
+
+		return new ResponseEntity<Usuario>(servicoUsuario.getUsuario(email).get(),  HttpStatus.OK);	
 	}
 	
 }

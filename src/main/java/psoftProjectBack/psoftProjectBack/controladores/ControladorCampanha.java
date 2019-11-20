@@ -50,19 +50,11 @@ public class ControladorCampanha {
 
 	}
 
-	@RequestMapping("campanha/allCamp")
-	public ResponseEntity<List<Campanha>> listarCampanhas() {
+	@PostMapping("/campanha/busca")
+	public ResponseEntity<List<Campanha>> buscarCampanhas(@RequestBody String textoDaBusca,
+			@RequestHeader("Authorization") String header) {
 
-		List<Campanha> campanhaEncontrada = this.servicoCampanha.listaCampanhas(); 
-
-		return new ResponseEntity<List<Campanha>>(campanhaEncontrada, HttpStatus.OK);
-
-	}
-
-	@RequestMapping("/campanha/busca")
-	public ResponseEntity<List<Campanha>> buscarCampanhas(@RequestBody String textoDaBusca) {
-
-		List<Campanha> campanhaEncontrada = this.servicoCampanha.recuperaCampanhas(textoDaBusca);
+		List<Campanha> campanhaEncontrada = this.servicoCampanha.recuperaCampanhasLike(textoDaBusca);
 
 		return new ResponseEntity<List<Campanha>>(campanhaEncontrada, HttpStatus.OK);
 

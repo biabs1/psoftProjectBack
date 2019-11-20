@@ -30,8 +30,12 @@ public class ServicoCampanha {
 		return false;
 	}
 
-	public List<Campanha> recuperaCampanhas(String textoDaBusca) {
-		return this.campanhasDAO.findByNomeContaining(textoDaBusca);
+	public List<Campanha> recuperaCampanhas(String nome) {
+		return this.campanhasDAO.findByNomeIgnoreCaseContaining(nome);
+	}
+	
+	public List<Campanha> recuperaCampanhasLike(String nome) {
+		return this.campanhasDAO.findByNomeLike(nome); 
 	}
 
 	public List<Campanha> listaCampanhas() {
