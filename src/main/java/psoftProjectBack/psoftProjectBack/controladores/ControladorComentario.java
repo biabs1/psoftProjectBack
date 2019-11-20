@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
+import psoftProjectBack.psoftProjectBack.entidades.Campanha;
 import psoftProjectBack.psoftProjectBack.entidades.Comentario;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoComentario;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
@@ -28,13 +29,16 @@ public class ControladorComentario {
 	}
 
 	@PostMapping("/comentario")
-	public ResponseEntity<Comentario> addComentario(@RequestBody Comentario comentario,
+	public ResponseEntity<Comentario> addComentario(@RequestBody Comentario comentario, Campanha campanha,
 			@RequestHeader("Authorization") String header) throws ServletException {
 		
 		String email = servicoJWT.recuperarSujeitoDoToken(header);
+		
 		if (!servicoUsuario.getUsuario(email).isPresent()) {	
 			return new ResponseEntity<Comentario>(HttpStatus.NOT_FOUND);
 		}
+		
+		comentario.setCampanha(campanha);
 		
 		comentario.setQuemComentou(this.servicoUsuario.getUsuario(email).get());
 		
@@ -45,7 +49,9 @@ public class ControladorComentario {
 	@DeleteMapping("/comentario/deleta")
 	public ResponseEntity<Comentario> removeComentario(@RequestBody Comentario comentario,
 			@RequestHeader("Authorization") String header) {
+		
 		String email = comentario.getQuemComentou().getEmail();
+		
 		if (!servicoUsuario.getUsuario(email).isPresent()) {
 			return new ResponseEntity<Comentario>(HttpStatus.NOT_FOUND);
 		}
