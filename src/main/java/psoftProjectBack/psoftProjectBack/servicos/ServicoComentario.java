@@ -2,9 +2,12 @@ package psoftProjectBack.psoftProjectBack.servicos;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import psoftProjectBack.psoftProjectBack.entidades.Comentario;
 import psoftProjectBack.psoftProjectBack.repositorios.RepositorioComentario;
 
+@Service
 public class ServicoComentario {
 	
 	private RepositorioComentario<Comentario, Long> comentariosDAO;
