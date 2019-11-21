@@ -35,18 +35,19 @@ public class ServicoCampanha {
 		return this.campanhasDAO.findByNomeIgnoreCaseContaining(nome);
 	}
 
-	public List<Campanha> listaCampanhas() {
+	public List<Campanha> recuperaTodasAsCampanhas() {
 		return this.campanhasDAO.findAll();
 	}
 
-	public List<Campanha> recuperarCampanhasAtivas() {
-		List<Campanha> ativas = new ArrayList<>();
-		for (Campanha campanha : ativas) {
-			if (campanha.getStatus().equals(StatusCampanha.ATIVA)) {
-				ativas.add(campanha);
+	public List<Campanha> recuperarCampanhasPorStatus(String status) {
+		List<Campanha> todasAsCampanhas = this.recuperaTodasAsCampanhas();
+		List<Campanha> statuSelecionado = new ArrayList<>();
+		for (Campanha c : todasAsCampanhas) {
+			if (c.getStatus().equalsStatus(status)) {
+				statuSelecionado.add(c);
 			}
 		}
-		return ativas;
+		return statuSelecionado;
 	}
 
 }
