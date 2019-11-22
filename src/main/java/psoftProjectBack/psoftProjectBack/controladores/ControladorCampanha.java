@@ -36,7 +36,7 @@ public class ControladorCampanha {
 
 	@PostMapping("/campanha")
 	public ResponseEntity<Campanha> cadastraCampanha(@RequestBody Campanha campanha,
-			@RequestHeader("Authorization") String header) throws ServletException {
+			@RequestHeader("Authorization") String header) throws Exception {
 
 		String email = servicoJWT.recuperarSujeitoDoToken(header);
 		if (!servicoUsuario.getUsuario(email).isPresent()) {
@@ -68,6 +68,13 @@ public class ControladorCampanha {
 
 		return new ResponseEntity<List<Campanha>>(this.servicoCampanha.recuperarCampanhasPorStatus(status),
 				HttpStatus.OK);
+
+	}
+
+	@GetMapping("/campanha/{id}")
+	public ResponseEntity<Campanha> acessaCampanha(@PathVariable Long id) {
+
+		return new ResponseEntity<Campanha>(this.servicoCampanha.acessaCampanha(id).get(), HttpStatus.OK);
 
 	}
 

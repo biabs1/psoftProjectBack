@@ -1,5 +1,6 @@
 package psoftProjectBack.psoftProjectBack.entidades;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -43,15 +44,14 @@ public class Campanha {
 		super();
 	}
 
-	public Campanha(int id, String nome, String nomeCurto, String descricao, Date deadline, StatusCampanha status,
-			double meta, List<Doacao> doacoes, Usuario dono, List<Comentario> comentarios, List<Curtida> curtidas) {
+	public Campanha(int id, String nome, String nomeCurto, String descricao, Date deadline, double meta,
+			List<Doacao> doacoes, Usuario dono, List<Comentario> comentarios, List<Curtida> curtidas) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.nomeCurto = nomeCurto;
 		this.descricao = descricao;
 		this.deadline = deadline;
-		this.status = status;
 		this.meta = meta;
 		this.doacoes = doacoes;
 		this.dono = dono;
