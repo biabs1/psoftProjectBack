@@ -27,12 +27,9 @@ public class ServicoCampanha {
 		Date dtConvert = java.sql.Date.valueOf(this.dataAtual());
 
 		if (campanha.getDeadline().compareTo(dtConvert) == -1) {
-			throw new Exception("A data não pode ser anterior a atual!");
+			throw new Exception("O deadline deve ser a pelo menos 24 de agora");
 		}
-		if (campanha.getDeadline().compareTo(dtConvert) == 0) {
-			throw new Exception("A data não pode ser o dia atual!");
-		}
-
+		
 		return this.campanhasDAO.save(campanha);
 	}
 
