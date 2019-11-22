@@ -22,7 +22,7 @@ public class Campanha {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
 	private String nome;
 	@JsonIgnore
 	private String nomeCurto;
@@ -59,11 +59,11 @@ public class Campanha {
 		this.curtidas = curtidas;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

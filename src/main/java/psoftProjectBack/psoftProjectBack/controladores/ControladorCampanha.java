@@ -63,7 +63,7 @@ public class ControladorCampanha {
 
 	}
 
-	@GetMapping("/campanha/{status}")
+	@GetMapping("/campanha/{status}/buscar")
 	public ResponseEntity<List<Campanha>> buscarCampanhasAtivas(@PathVariable String status) {
 
 		return new ResponseEntity<List<Campanha>>(this.servicoCampanha.recuperarCampanhasPorStatus(status),
@@ -72,10 +72,15 @@ public class ControladorCampanha {
 	}
 
 	@GetMapping("/campanha/{id}")
-	public ResponseEntity<Campanha> acessaCampanha(@PathVariable Long id) {
+	public ResponseEntity<Campanha> acessaCampanha(@PathVariable("id") long id) {
 
 		return new ResponseEntity<Campanha>(this.servicoCampanha.acessaCampanha(id).get(), HttpStatus.OK);
 
+	}
+	
+	@GetMapping("/campanha/{id}/quantoFalta")
+	public ResponseEntity<Double> acessaQuantoFaltaCampanha(@PathVariable("id") long id) {
+		return new ResponseEntity<Double>(this.servicoCampanha.quantoFalta(id), HttpStatus.OK);
 	}
 
 }

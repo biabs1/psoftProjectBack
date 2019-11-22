@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
+import psoftProjectBack.psoftProjectBack.entidades.Doacao;
 import psoftProjectBack.psoftProjectBack.repositorios.RepositorioCampanha;
 
 @Service
@@ -69,6 +70,19 @@ public class ServicoCampanha {
 
 	public Optional<Campanha> acessaCampanha(Long id) {
 		return this.campanhasDAO.findById(id);
+	}
+	
+	private double quantiaRecebida(Campanha campanha) {
+		double quantiaRecebida = 0;
+		for (Doacao d : campanha.getDoacoes()) {
+			quantiaRecebida += d.getQuantiaDoada();
+		}
+		return quantiaRecebida;
+	}
+
+	public Double quantoFalta(Long id) {
+		Campanha campanha = acessaCampanha(id).get();
+		return campanha.getMeta() - quantiaRecebida(campanha);
 	}
 
 }
