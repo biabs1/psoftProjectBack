@@ -84,4 +84,13 @@ public class ServicoCampanha {
 		return campanha.getMeta() - quantiaRecebida(campanha);
 	}
 
+	public boolean jaCurtiu(Campanha campanha, Usuario usuario) throws Exception {
+		for (Curtida c: campanha.getCurtidas()) {
+			if (c.getQuemDeuLike().equals(usuario)) {
+				return true;
+			}
+		}
+		return false;	
+	}
+
 }
