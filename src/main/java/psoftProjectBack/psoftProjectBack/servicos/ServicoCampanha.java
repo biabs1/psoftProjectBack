@@ -9,7 +9,9 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
+import psoftProjectBack.psoftProjectBack.entidades.Curtida;
 import psoftProjectBack.psoftProjectBack.entidades.Doacao;
+import psoftProjectBack.psoftProjectBack.entidades.Usuario;
 import psoftProjectBack.psoftProjectBack.repositorios.RepositorioCampanha;
 
 @Service

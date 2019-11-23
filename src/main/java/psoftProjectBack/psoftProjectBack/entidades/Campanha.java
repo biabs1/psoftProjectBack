@@ -24,7 +24,6 @@ public class Campanha {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String nome;
-	@JsonIgnore
 	private String nomeCurto;
 	private String descricao;
 	@JsonFormat(pattern = "yyyy-MM-dd")

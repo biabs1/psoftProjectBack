@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
+import psoftProjectBack.psoftProjectBack.entidades.Curtida;
 import psoftProjectBack.psoftProjectBack.enumerador.StatusCampanha;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoCampanha;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
