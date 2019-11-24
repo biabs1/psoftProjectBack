@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
 import psoftProjectBack.psoftProjectBack.entidades.Comentario;
+import psoftProjectBack.psoftProjectBack.servicos.ServicoCampanha;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoComentario;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoUsuario;
@@ -22,16 +24,20 @@ public class ControladorComentario {
 	private ServicoComentario servicoComentario;
 	private ServicoUsuario servicoUsuario;
 	private ServicoJWT servicoJWT;
+	private ServicoCampanha servicoCampanha;
 
-	public ControladorComentario(ServicoComentario sComentario, ServicoUsuario sUsuario, ServicoJWT sJWT) {
+	public ControladorComentario(ServicoComentario sComentario, ServicoUsuario sUsuario,
+			ServicoCampanha sCampanha, ServicoJWT sJWT) {
 		super();
 		this.servicoComentario = sComentario; 
 		this.servicoUsuario = sUsuario;
 		this.servicoJWT = sJWT;
+		this.servicoCampanha = sCampanha;
 	}
 
-	@PostMapping("/comentario")
-	public ResponseEntity<Comentario> addComentario(@RequestBody Comentario comentario, Campanha campanha,
+	@PostMapping("/campanha/{id}/comentar")
+	public ResponseEntity<Comentario> addComentario(@RequestBody Comentario comentario, 
+			@PathVariable("id") long id,
 			@RequestHeader("Authorization") String header) throws ServletException {
 		
 		String email = servicoJWT.recuperarSujeitoDoToken(header);
@@ -39,6 +45,8 @@ public class ControladorComentario {
 		if (!servicoUsuario.getUsuario(email).isPresent()) {	
 			return new ResponseEntity<Comentario>(HttpStatus.NOT_FOUND);
 		}
+		
+		Campanha campanha = servicoCampanha.acessaCampanha(id).get();
 		
 		comentario.setCampanha(campanha);
 		
@@ -48,7 +56,7 @@ public class ControladorComentario {
 						HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping("/comentario/deleta")
+	@DeleteMapping("/campanha/{id}/comentario/deleta")
 	public ResponseEntity<Comentario> removeComentario(@RequestBody Comentario comentario,
 			@RequestHeader("Authorization") String header) {
 		
@@ -69,5 +77,7 @@ public class ControladorComentario {
 		}
 		return new ResponseEntity<Comentario>(HttpStatus.UNAUTHORIZED);
 	}
+	
+	//@GetMapping("/comentario/")
 
 }

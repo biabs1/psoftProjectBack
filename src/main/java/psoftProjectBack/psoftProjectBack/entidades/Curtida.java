@@ -1,5 +1,6 @@
 package psoftProjectBack.psoftProjectBack.entidades;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +15,7 @@ public class Curtida {
 	private int id;
 	@OneToOne
 	private Usuario quemDeuLike;
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Campanha campanha;
 
 	public Curtida() {

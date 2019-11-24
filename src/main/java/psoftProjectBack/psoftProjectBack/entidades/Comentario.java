@@ -1,5 +1,6 @@
 package psoftProjectBack.psoftProjectBack.entidades;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,7 @@ public class Comentario {
 	@OneToOne
 	@JsonIgnore
 	private Campanha campanha;
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JsonIgnore
 	private Comentario comentario;
 	private boolean apagado;

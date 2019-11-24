@@ -98,4 +98,10 @@ public class ServicoCampanha {
 		return campanha.getCurtidas().size();
 	}
 
+	public void removerCurtida(Campanha campanha, Curtida curtida) {
+		List<Curtida> curtidas = campanha.getCurtidas();
+		curtidas.remove(curtida);
+		campanha.setCurtidas(curtidas);
+	}
+
 }

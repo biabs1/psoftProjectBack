@@ -25,10 +25,8 @@ public class ServicoCurtida {
 		return this.curtidasDAO.findById(id);
 	}
 
-	public Curtida removerCurtida(Curtida curtida) {
-		Curtida curtidaRemovida = curtida;
+	public void removerCurtida(Curtida curtida) {
 		this.curtidasDAO.delete(curtida);
-		return curtidaRemovida;
 	}
 	
 

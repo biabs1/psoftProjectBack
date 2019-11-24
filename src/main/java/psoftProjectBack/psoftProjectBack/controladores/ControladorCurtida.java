@@ -50,7 +50,9 @@ public class ControladorCurtida {
 		Usuario usuario = servicoUsuario.getUsuario(email).get();
 		
 		if (servicoCampanha.jaCurtiu(campanha, usuario)) {
-			return new ResponseEntity<Curtida>(servicoCurtida.removerCurtida(curtida), HttpStatus.OK);
+			//servicoCampanha.removerCurtida(campanha, curtida);
+			servicoCurtida.removerCurtida(curtida);
+			return new ResponseEntity<Curtida>(curtida, HttpStatus.OK);
 			//throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Você já curtiu esta campanha");
 		}
 		
