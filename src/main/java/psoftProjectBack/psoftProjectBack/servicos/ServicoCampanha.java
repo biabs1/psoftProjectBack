@@ -93,4 +93,9 @@ public class ServicoCampanha {
 		return false;	
 	}
 
+	public Integer quantidadeCurtidas(long id) {
+		Campanha campanha = acessaCampanha(id).get(); 
+		return campanha.getCurtidas().size();
+	}
+
 }
