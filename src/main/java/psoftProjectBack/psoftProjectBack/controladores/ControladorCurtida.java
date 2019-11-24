@@ -37,7 +37,7 @@ public class ControladorCurtida {
 	}
 	
 	@PostMapping("/campanha/{id}/curtir")
-	public ResponseEntity<Curtida> addCurtida(@RequestBody Curtida curtida,
+	public ResponseEntity<Curtida> addRemoveCurtida(@RequestBody Curtida curtida,
 			@PathVariable("id") long id, 
 			@RequestHeader("Authorization") String header) throws Exception {
 		
@@ -50,7 +50,8 @@ public class ControladorCurtida {
 		Usuario usuario = servicoUsuario.getUsuario(email).get();
 		
 		if (servicoCampanha.jaCurtiu(campanha, usuario)) {
-			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Você já curtiu esta campanha");
+			return new ResponseEntity<Curtida>(servicoCurtida.removerCurtida(curtida), HttpStatus.OK);
+			//throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Você já curtiu esta campanha");
 		}
 		
 		curtida.setCampanha(campanha);
