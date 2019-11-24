@@ -27,7 +27,7 @@ public class ServicoComentario {
 
 	public Comentario removerComentario(Comentario comentario) {
 		comentario.setApagado(true);
-		return comentario;
+		return this.comentariosDAO.save(comentario);
 	}
 	
 	

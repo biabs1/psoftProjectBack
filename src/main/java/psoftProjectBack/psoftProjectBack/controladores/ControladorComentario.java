@@ -1,10 +1,13 @@
 package psoftProjectBack.psoftProjectBack.controladores;
 
+import java.util.List;
+
 import javax.servlet.ServletException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,22 +52,23 @@ public class ControladorComentario {
 		Campanha campanha = servicoCampanha.acessaCampanha(id).get();
 		
 		comentario.setCampanha(campanha);
-		
 		comentario.setQuemComentou(this.servicoUsuario.getUsuario(email).get());
 		
 		return new ResponseEntity<Comentario>(servicoComentario.adicionarComentario(comentario),
 						HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping("/campanha/{id}/comentario/deleta")
-	public ResponseEntity<Comentario> removeComentario(@RequestBody Comentario comentario,
-			@RequestHeader("Authorization") String header) {
+	@DeleteMapping("/campanha/comentario/{id}/deleta")
+	public ResponseEntity<Comentario> removeComentario(@PathVariable("id") long id,
+			@RequestHeader("Authorization") String header) throws ServletException {
 		
-		String email = comentario.getQuemComentou().getEmail();
+		String email = servicoJWT.recuperarSujeitoDoToken(header);
 		
 		if (!servicoUsuario.getUsuario(email).isPresent()) {
 			return new ResponseEntity<Comentario>(HttpStatus.NOT_FOUND);
 		}
+		
+		Comentario comentario = servicoComentario.getComentario(id).get();
 		
 		try {
 			if (servicoJWT.usuarioTemPermissao(header, email) &&
@@ -78,6 +82,10 @@ public class ControladorComentario {
 		return new ResponseEntity<Comentario>(HttpStatus.UNAUTHORIZED);
 	}
 	
-	//@GetMapping("/comentario/")
+	@GetMapping("/campanha/{id}/comentario/listar")
+	public ResponseEntity<List<Comentario>> listarComentarios(@PathVariable("id") long id,
+			@RequestHeader("Authorization") String header) {
+		return new ResponseEntity<List<Comentario>>(servicoCampanha.listarComentarios(id), HttpStatus.OK);
+	}
 
 }

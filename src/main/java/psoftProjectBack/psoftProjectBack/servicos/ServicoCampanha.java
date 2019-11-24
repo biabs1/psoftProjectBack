@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
+import psoftProjectBack.psoftProjectBack.entidades.Comentario;
 import psoftProjectBack.psoftProjectBack.entidades.Curtida;
 import psoftProjectBack.psoftProjectBack.entidades.Doacao;
 import psoftProjectBack.psoftProjectBack.entidades.Usuario;
@@ -102,6 +103,17 @@ public class ServicoCampanha {
 		List<Curtida> curtidas = campanha.getCurtidas();
 		curtidas.remove(curtida);
 		campanha.setCurtidas(curtidas);
+	}
+
+	public List<Comentario> listarComentarios(long id) {
+		Campanha campanha = acessaCampanha(id).get();
+		List<Comentario> comentarios = new ArrayList<Comentario>();
+		for (Comentario c: campanha.getComentarios()) {
+			if (!c.isApagado()) {
+				comentarios.add(c);
+			}
+		}
+		return comentarios;
 	}
 
 }
