@@ -1,6 +1,5 @@
 package psoftProjectBack.psoftProjectBack.servicos;
 
-import java.awt.color.CMMException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;

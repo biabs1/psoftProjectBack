@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
-import psoftProjectBack.psoftProjectBack.entidades.Doacao;
 import psoftProjectBack.psoftProjectBack.enumerador.StatusCampanha;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoCampanha;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
