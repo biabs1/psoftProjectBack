@@ -132,7 +132,7 @@ public class ServicoCampanha {
 		return campUsuarios;
 	}
 
-	public List<Campanha> campanhasOrdenadas(String criterio) {
+	private List<Campanha> campanhasOrdenadas(String criterio) {
 
 		Comparator<Campanha> comp = null;
 
@@ -149,6 +149,33 @@ public class ServicoCampanha {
 		Collections.sort(campOrdenadas, comp);
 
 		return campOrdenadas;
+	}
+
+	public List<Campanha> campanhasOrdenadasTop5(String criterio) {
+		List<Campanha> ordenadas = this.campanhasOrdenadas(criterio);
+
+		if (ordenadas.size() <= 5) {
+			return ordenadas;
+		} else {
+			List<Campanha> top5 = new ArrayList<>();
+			for (int i = 0; i < 5; i++) {
+				top5.add(ordenadas.get(i));
+			}
+			return top5;
+		}
+
+	}
+
+	public List<Campanha> campanhasQueUsuarioDoou(String email) {
+
+		List<Campanha> camps = new ArrayList<>();
+
+		for (int i = 0; i < recuperaTodasAsCampanhas().size(); i++) {
+			if (recuperaTodasAsCampanhas().get(i).getDoacoes().get(i).getQuemDoou().getEmail().equals(email)) {
+				camps.add(recuperaTodasAsCampanhas().get(i));
+			}
+		}
+		return camps;
 	}
 
 }

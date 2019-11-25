@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
+import psoftProjectBack.psoftProjectBack.entidades.Doacao;
 import psoftProjectBack.psoftProjectBack.enumerador.StatusCampanha;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoCampanha;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
@@ -107,7 +108,17 @@ public class ControladorCampanha {
 
 	@GetMapping("/campanha/ordenadas/{criterio}")
 	public ResponseEntity<List<Campanha>> campanhasOrdenadasPorCriterio(@PathVariable("criterio") String criterio) {
-		return new ResponseEntity<List<Campanha>>(this.servicoCampanha.campanhasOrdenadas(criterio), HttpStatus.OK);
+		return new ResponseEntity<List<Campanha>>(this.servicoCampanha.campanhasOrdenadasTop5(criterio), HttpStatus.OK);
+	}
+
+	@GetMapping("/campanha/quaisDoei")
+	public ResponseEntity<List<Campanha>> campanhasQueUsuarioDoou(@RequestHeader("Authorization") String header)
+			throws ServletException {
+
+		String email = this.servicoJWT.recuperarSujeitoDoToken(header);
+
+		return new ResponseEntity<List<Campanha>>(this.servicoCampanha.campanhasQueUsuarioDoou(email), HttpStatus.OK);
+
 	}
 
 	private void verificaUsuario(String email) {
