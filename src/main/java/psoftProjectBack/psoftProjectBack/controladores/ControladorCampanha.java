@@ -106,7 +106,7 @@ public class ControladorCampanha {
 	}
 
 	@GetMapping("/campanha/ordenadas/{criterio}")
-	public ResponseEntity<List<Campanha>> campanhasOrdenadasPelaData(@PathVariable("criterio") String criterio) {
+	public ResponseEntity<List<Campanha>> campanhasOrdenadasPorCriterio(@PathVariable("criterio") String criterio) {
 		return new ResponseEntity<List<Campanha>>(this.servicoCampanha.campanhasOrdenadas(criterio), HttpStatus.OK);
 	}
 
