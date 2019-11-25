@@ -1,6 +1,5 @@
 package psoftProjectBack.psoftProjectBack.entidades;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import psoftProjectBack.psoftProjectBack.enumerador.StatusCampanha;
 
@@ -43,14 +41,15 @@ public class Campanha {
 		super();
 	}
 
-	public Campanha(int id, String nome, String nomeCurto, String descricao, Date deadline, double meta,
-			List<Doacao> doacoes, Usuario dono, List<Comentario> comentarios, List<Curtida> curtidas) {
+	public Campanha(long id, String nome, String nomeCurto, String descricao, Date deadline, StatusCampanha status,
+			double meta, List<Doacao> doacoes, Usuario dono, List<Comentario> comentarios, List<Curtida> curtidas) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.nomeCurto = nomeCurto;
 		this.descricao = descricao;
 		this.deadline = deadline;
+		this.status = status;
 		this.meta = meta;
 		this.doacoes = doacoes;
 		this.dono = dono;
@@ -144,6 +143,14 @@ public class Campanha {
 
 	public void setCurtidas(List<Curtida> curtidas) {
 		this.curtidas = curtidas;
+	}
+
+	public double quantoFaltaPraMeta() {
+		double totalArrecadado = 0.0;
+		for (int i = 0; i < this.doacoes.size(); i++) {
+			totalArrecadado += this.doacoes.get(i).getQuantiaDoada();
+		}
+		return meta - totalArrecadado;
 	}
 
 }

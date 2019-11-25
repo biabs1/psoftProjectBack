@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
-import psoftProjectBack.psoftProjectBack.entidades.Curtida;
 import psoftProjectBack.psoftProjectBack.enumerador.StatusCampanha;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoCampanha;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
@@ -35,7 +34,7 @@ public class ControladorCampanha {
 		this.servicoJWT = sJwt;
 		this.servicoCampanha = sCampanha;
 	}
-	
+
 	@GetMapping("/")
 	public String index() {
 		return "";
@@ -46,15 +45,14 @@ public class ControladorCampanha {
 			@RequestHeader("Authorization") String header) throws Exception {
 
 		String email = servicoJWT.recuperarSujeitoDoToken(header);
-		if (!servicoUsuario.getUsuario(email).isPresent()) {
-			return new ResponseEntity<Campanha>(HttpStatus.NOT_FOUND);
-		}
+
+		verificaUsuario(email);
 
 		campanha.setDono(this.servicoUsuario.getUsuario(email).get());
 		campanha.setStatus(StatusCampanha.ATIVA);
 
-		 if (servicoCampanha.nomeCurtoIgual(campanha))
-			 throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Nome curto já cadastrado");
+		if (servicoCampanha.nomeCurtoIgual(campanha))
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Nome curto já cadastrado");
 
 		return new ResponseEntity<Campanha>(servicoCampanha.cadastraCampanha(campanha), HttpStatus.CREATED);
 
@@ -84,14 +82,38 @@ public class ControladorCampanha {
 	public ResponseEntity<Campanha> acessaCampanha(@PathVariable("id") long id) {
 		return new ResponseEntity<Campanha>(this.servicoCampanha.acessaCampanha(id).get(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/campanha/{id}/quantoFalta")
 	public ResponseEntity<Double> acessaQuantoFaltaCampanha(@PathVariable("id") long id) {
 		return new ResponseEntity<Double>(this.servicoCampanha.quantoFalta(id), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/campanha/{id}/quantidadeCurtidas")
 	public ResponseEntity<Integer> acessaQuantidadeCurtidasCampanha(@PathVariable("id") long id) {
 		return new ResponseEntity<Integer>(this.servicoCampanha.quantidadeCurtidas(id), HttpStatus.OK);
 	}
+
+	@GetMapping("/campanha/{id}/minhasCampanhas")
+	public ResponseEntity<List<Campanha>> recuperaCampanhasDoUsuario(@RequestHeader("Authorization") String header)
+			throws ServletException {
+
+		String email = servicoJWT.recuperarSujeitoDoToken(header);
+
+		verificaUsuario(email);
+
+		return new ResponseEntity<List<Campanha>>(this.servicoCampanha.recuperaCampanhasDoUsuario(email),
+				HttpStatus.OK);
+	}
+
+	@GetMapping("/campanha/ordenadas/{criterio}")
+	public ResponseEntity<List<Campanha>> campanhasOrdenadasPelaData(@PathVariable("criterio") String criterio) {
+		return new ResponseEntity<List<Campanha>>(this.servicoCampanha.campanhasOrdenadas(criterio), HttpStatus.OK);
+	}
+
+	private void verificaUsuario(String email) {
+		if (!servicoUsuario.getUsuario(email).isPresent()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario nao encontrado!");
+		}
+	}
+
 }

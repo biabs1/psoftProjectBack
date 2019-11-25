@@ -1,13 +1,19 @@
 package psoftProjectBack.psoftProjectBack.servicos;
 
+import java.awt.color.CMMException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import psoftProjectBack.psoftProjectBack.comparadores.ComparadorData;
+import psoftProjectBack.psoftProjectBack.comparadores.ComparadorLike;
+import psoftProjectBack.psoftProjectBack.comparadores.ComparadorMeta;
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
 import psoftProjectBack.psoftProjectBack.entidades.Comentario;
 import psoftProjectBack.psoftProjectBack.entidades.Curtida;
@@ -32,7 +38,7 @@ public class ServicoCampanha {
 		if (campanha.getDeadline().compareTo(dtConvert) == -1) {
 			throw new Exception("O deadline deve ser a pelo menos 24h de agora");
 		}
-		
+
 		return this.campanhasDAO.save(campanha);
 	}
 
@@ -71,7 +77,7 @@ public class ServicoCampanha {
 	public Optional<Campanha> acessaCampanha(Long id) {
 		return this.campanhasDAO.findById(id);
 	}
-	
+
 	private double quantiaRecebida(Campanha campanha) {
 		double quantiaRecebida = 0;
 		for (Doacao d : campanha.getDoacoes()) {
@@ -86,16 +92,16 @@ public class ServicoCampanha {
 	}
 
 	public boolean jaCurtiu(Campanha campanha, Usuario usuario) throws Exception {
-		for (Curtida c: campanha.getCurtidas()) {
+		for (Curtida c : campanha.getCurtidas()) {
 			if (c.getQuemDeuLike().equals(usuario)) {
 				return true;
 			}
 		}
-		return false;	
+		return false;
 	}
 
 	public Integer quantidadeCurtidas(long id) {
-		Campanha campanha = acessaCampanha(id).get(); 
+		Campanha campanha = acessaCampanha(id).get();
 		return campanha.getCurtidas().size();
 	}
 
@@ -108,12 +114,41 @@ public class ServicoCampanha {
 	public List<Comentario> listarComentarios(long id) {
 		Campanha campanha = acessaCampanha(id).get();
 		List<Comentario> comentarios = new ArrayList<Comentario>();
-		for (Comentario c: campanha.getComentarios()) {
+		for (Comentario c : campanha.getComentarios()) {
 			if (!c.isApagado()) {
 				comentarios.add(c);
 			}
 		}
 		return comentarios;
+	}
+
+	public List<Campanha> recuperaCampanhasDoUsuario(String email) {
+		List<Campanha> campUsuarios = new ArrayList<Campanha>();
+		for (Campanha c : recuperaTodasAsCampanhas()) {
+			if (c.getDono().getEmail().equals(email)) {
+				campUsuarios.add(c);
+			}
+		}
+		return campUsuarios;
+	}
+
+	public List<Campanha> campanhasOrdenadas(String criterio) {
+
+		Comparator<Campanha> comp = null;
+
+		if (criterio.equalsIgnoreCase("data")) {
+			comp = new ComparadorData();
+		} else if (criterio.equalsIgnoreCase("meta")) {
+			comp = new ComparadorMeta();
+		} else if (criterio.equalsIgnoreCase("like")) {
+			comp = new ComparadorLike();
+		}
+
+		List<Campanha> campOrdenadas = this.campanhasDAO.findAll();
+
+		Collections.sort(campOrdenadas, comp);
+
+		return campOrdenadas;
 	}
 
 }
