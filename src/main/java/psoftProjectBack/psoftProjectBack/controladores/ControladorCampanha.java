@@ -34,6 +34,11 @@ public class ControladorCampanha {
 		this.servicoJWT = sJwt;
 		this.servicoCampanha = sCampanha;
 	}
+	
+	@GetMapping("/")
+	public String index() {
+		return "";
+	}
 
 	@PostMapping("/campanha")
 	public ResponseEntity<Campanha> cadastraCampanha(@RequestBody Campanha campanha,
