@@ -12,28 +12,27 @@ public class Curtida {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
 	@OneToOne
 	private Usuario quemDeuLike;
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne(cascade = { CascadeType.ALL })
 	private Campanha campanha;
 
 	public Curtida() {
 		super();
 	}
 
-	public Curtida(int id, Usuario quemDeuLike, Campanha campanha) {
+	public Curtida(Usuario quemDeuLike, Campanha campanha) {
 		super();
-		this.id = id;
 		this.quemDeuLike = quemDeuLike;
 		this.campanha = campanha;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

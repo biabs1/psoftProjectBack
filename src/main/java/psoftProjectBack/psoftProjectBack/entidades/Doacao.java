@@ -13,7 +13,7 @@ public class Doacao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
 	@OneToOne
 	private Usuario quemDoou;
 	private double quantiaDoada;
@@ -32,11 +32,11 @@ public class Doacao {
 		this.dataDaDoacao = dataDaDoacao;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
