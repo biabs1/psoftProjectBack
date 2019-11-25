@@ -30,7 +30,7 @@ public class ServicoCampanha {
 		Date dtConvert = java.sql.Date.valueOf(this.dataAtual());
 
 		if (campanha.getDeadline().compareTo(dtConvert) == -1) {
-			throw new Exception("O deadline deve ser a pelo menos 24 de agora");
+			throw new Exception("O deadline deve ser a pelo menos 24h de agora");
 		}
 		
 		return this.campanhasDAO.save(campanha);

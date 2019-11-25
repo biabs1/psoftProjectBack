@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
 import psoftProjectBack.psoftProjectBack.entidades.Curtida;
@@ -52,9 +53,8 @@ public class ControladorCampanha {
 		campanha.setDono(this.servicoUsuario.getUsuario(email).get());
 		campanha.setStatus(StatusCampanha.ATIVA);
 
-		// if (servicoCampanha.nomeCurtoIgual(campanha))
-		// throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Nome curto já
-		// cadastrado");
+		 if (servicoCampanha.nomeCurtoIgual(campanha))
+			 throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Nome curto já cadastrado");
 
 		return new ResponseEntity<Campanha>(servicoCampanha.cadastraCampanha(campanha), HttpStatus.CREATED);
 
@@ -62,9 +62,7 @@ public class ControladorCampanha {
 
 	@GetMapping("/campanha")
 	public ResponseEntity<List<Campanha>> buscarCampanhas(@RequestParam("nome") String textoDaBusca) {
-
 		List<Campanha> campanhasEncontradas = this.servicoCampanha.recuperaCampanhas(textoDaBusca);
-
 		return new ResponseEntity<List<Campanha>>(campanhasEncontradas, HttpStatus.OK);
 
 	}
