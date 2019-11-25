@@ -96,7 +96,7 @@ public class ControladorCampanha {
 		return new ResponseEntity<Integer>(this.servicoCampanha.quantidadeCurtidas(id), HttpStatus.OK);
 	}
 
-	@GetMapping("/campanha/{id}/minhasCampanhas")
+	@GetMapping("/campanha/minhasCampanhas")
 	public ResponseEntity<List<Campanha>> recuperaCampanhasDoUsuario(@RequestHeader("Authorization") String header)
 			throws ServletException {
 
