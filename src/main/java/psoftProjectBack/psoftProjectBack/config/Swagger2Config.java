@@ -1,9 +1,8 @@
 package psoftProjectBack.psoftProjectBack.config;
 
-import static springfox.documentation.builders.PathSelectors.regex;
-import java.util.Collections;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -19,7 +18,7 @@ public class Swagger2Config {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("net.guides.springboot2.springboot2swagger2.controller"))
+				.apis(RequestHandlerSelectors.basePackage("psoftProjectBack.psoftProjectBack.controladores"))
 				.paths(PathSelectors.regex("/.*")).build().apiInfo(apiEndPointsInfo());
 	}
 
