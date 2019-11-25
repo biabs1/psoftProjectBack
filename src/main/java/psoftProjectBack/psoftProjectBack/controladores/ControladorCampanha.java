@@ -61,7 +61,13 @@ public class ControladorCampanha {
 	}
 
 	@GetMapping("/campanha")
-	public ResponseEntity<List<Campanha>> buscarCampanhas(@RequestParam("nome") String textoDaBusca) {
+	public ResponseEntity<List<Campanha>> buscarCampanhas(@RequestParam("nome") String textoDaBusca,
+			@RequestHeader("Authorization") String header) throws ServletException {
+		String email = servicoJWT.recuperarSujeitoDoToken(header);
+		if (!servicoUsuario.getUsuario(email).isPresent()) {
+			return new ResponseEntity<List<Campanha>>(HttpStatus.NOT_FOUND);
+		}
+
 		List<Campanha> campanhasEncontradas = this.servicoCampanha.recuperaCampanhas(textoDaBusca);
 		return new ResponseEntity<List<Campanha>>(campanhasEncontradas, HttpStatus.OK);
 
