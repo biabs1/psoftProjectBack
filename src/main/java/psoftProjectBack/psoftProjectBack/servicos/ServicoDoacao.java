@@ -11,10 +11,12 @@ public class ServicoDoacao {
 	private RepositorioDoacao<Doacao, Long> doacoesDAO;
 
 	public ServicoDoacao(RepositorioDoacao<Doacao, Long> doacoesDAO) {
+		super(); 
 		this.doacoesDAO = doacoesDAO;
 	}
 
 	public Doacao realizaDoacao(Doacao doacao) {
+
 		return this.doacoesDAO.save(doacao);
 	}
 

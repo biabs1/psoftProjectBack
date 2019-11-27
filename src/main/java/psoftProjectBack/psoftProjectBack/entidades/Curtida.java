@@ -1,11 +1,12 @@
 package psoftProjectBack.psoftProjectBack.entidades;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Curtida {
@@ -15,7 +16,8 @@ public class Curtida {
 	private long id;
 	@OneToOne
 	private Usuario quemDeuLike;
-	@OneToOne(cascade = { CascadeType.ALL })
+	@OneToOne //(cascade = { CascadeType.ALL })
+	@JsonIgnore
 	private Campanha campanha;
 
 	public Curtida() {

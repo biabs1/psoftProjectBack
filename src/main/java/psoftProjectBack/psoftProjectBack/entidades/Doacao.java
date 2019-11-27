@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Doacao {
 
@@ -17,19 +20,23 @@ public class Doacao {
 	@OneToOne
 	private Usuario quemDoou;
 	private double quantiaDoada;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date dataDaDoacao;
 	@OneToOne
+	@JsonIgnore
 	private Campanha campanha;
 
 	public Doacao() {
 		super();
 	}
 
-	public Doacao(Usuario quemDoou, double quantiaDoada, Date dataDaDoacao) {
+	public Doacao(long id, Usuario quemDoou, double quantiaDoada, Date dataDaDoacao, Campanha campanha) {
 		super();
+		this.id = id;
 		this.quemDoou = quemDoou;
 		this.quantiaDoada = quantiaDoada;
 		this.dataDaDoacao = dataDaDoacao;
+		this.campanha = campanha;
 	}
 
 	public long getId() {

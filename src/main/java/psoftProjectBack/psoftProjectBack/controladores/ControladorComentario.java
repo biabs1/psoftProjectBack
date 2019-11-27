@@ -58,7 +58,7 @@ public class ControladorComentario {
 						HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping("/campanha/comentario/{id}/deleta")
+	@DeleteMapping("/campanha/comentario/deleta/{id}")
 	public ResponseEntity<Comentario> removeComentario(@PathVariable("id") long id,
 			@RequestHeader("Authorization") String header) throws ServletException {
 		
@@ -69,6 +69,7 @@ public class ControladorComentario {
 		}
 		
 		Comentario comentario = servicoComentario.getComentario(id).get();
+		
 		
 		try {
 			if (servicoJWT.usuarioTemPermissao(header, email) &&
