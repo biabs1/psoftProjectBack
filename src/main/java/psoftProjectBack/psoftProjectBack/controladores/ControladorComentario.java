@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
 import psoftProjectBack.psoftProjectBack.entidades.Comentario;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoCampanha;
@@ -21,6 +22,7 @@ import psoftProjectBack.psoftProjectBack.servicos.ServicoComentario;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoUsuario;
 
+@Api(value="Sistema de gerenciamento de comentario", description="Controlador do gerenciamento de comentarios das campanhas")
 @RestController
 public class ControladorComentario {
 	

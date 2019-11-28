@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import psoftProjectBack.psoftProjectBack.entidades.Usuario;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoUsuario;
 
+@Api(value="Sistema de gerenciamento de login", description="Controlador do login para autenticar usuários")
 @RestController
 @RequestMapping("/auth")
 public class ControladorLogin {

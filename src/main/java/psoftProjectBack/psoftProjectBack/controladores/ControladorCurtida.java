@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
 import psoftProjectBack.psoftProjectBack.entidades.Curtida;
 import psoftProjectBack.psoftProjectBack.entidades.Usuario;
@@ -16,6 +17,7 @@ import psoftProjectBack.psoftProjectBack.servicos.ServicoCurtida;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoUsuario;
 
+@Api(value="Sistema de gerenciamento de curtida", description="Controlador do gerenciamento de curtidas das campanhas")
 @RestController
 public class ControladorCurtida {
 	

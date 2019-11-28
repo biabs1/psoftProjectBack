@@ -22,7 +22,7 @@ import psoftProjectBack.psoftProjectBack.servicos.ServicoCampanha;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoUsuario;
 
-@Api(value = "Sistema de gerenciamento de campanhas")
+@Api(value="Sistema de gerenciamento de campanha", description="Controlador do sistema de gerenciamento de campanhas")
 @RestController
 public class ControladorCampanha {
 

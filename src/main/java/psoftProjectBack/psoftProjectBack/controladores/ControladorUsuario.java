@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import io.swagger.annotations.Api;
 import psoftProjectBack.psoftProjectBack.entidades.Usuario;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoJWT;
 import psoftProjectBack.psoftProjectBack.servicos.ServicoUsuario;
 
+@Api(value="Sistema de gerenciamento de usuario", description="Controlador do gerenciamento de usuarios no sistema")
 @RestController
 public class ControladorUsuario {
 	
