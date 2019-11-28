@@ -131,36 +131,14 @@ public class ServicoCampanha {
 		return campUsuarios;
 	}
 
-	private List<Campanha> campanhasOrdenadas(String criterio) {
-
-		Comparator<Campanha> comp = null;
+	public List<Campanha> campanhasOrdenadasTop5(String criterio) {
 
 		if (criterio.equalsIgnoreCase("data")) {
 			return this.campanhasDAO.findTop5ByOrderByDeadline();
 		} else if (criterio.equalsIgnoreCase("meta")) {
-			comp = new ComparadorMeta();
-		} else if (criterio.equalsIgnoreCase("like")) {
-			comp = new ComparadorLike();
-		}
-
-		List<Campanha> campOrdenadas = this.campanhasDAO.findAll();
-
-		Collections.sort(campOrdenadas, comp);
-
-		return campOrdenadas;
-	}
-
-	public List<Campanha> campanhasOrdenadasTop5(String criterio) {
-		List<Campanha> ordenadas = this.campanhasOrdenadas(criterio);
-
-		if (ordenadas.size() <= 5) {
-			return ordenadas;
+			return this.campanhasDAO.findTop5ByOrderByMeta();
 		} else {
-			List<Campanha> top5 = new ArrayList<>();
-			for (int i = 0; i < 5; i++) {
-				top5.add(ordenadas.get(i));
-			}
-			return top5;
+			return this.campanhasDAO.findTop5ByOrderByCurtidas();
 		}
 
 	}

@@ -12,5 +12,9 @@ public interface RepositorioCampanha<T, ID extends Serializable> extends JpaRepo
 	List<Campanha> findByNomeIgnoreCaseContaining(String nome);
 	
 	List<Campanha> findTop5ByOrderByDeadline();
+	
+	List<Campanha> findTop5ByOrderByMeta();
+	
+	List<Campanha> findTop5ByOrderByCurtidas();
 
 }
