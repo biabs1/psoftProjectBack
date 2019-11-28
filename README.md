@@ -18,6 +18,11 @@ O link para deploy da aplicação (Backend + Frontend) está no link: http://aju
 ## Vídeo demonstrativo
 Segue link para vídeo demonstrativo da aplicação:https://youtu.be/-qGLa6BqiAs
 
+## Quer testar a aplicação?
+Aqui está um usuário de teste para você ;)
+E-mail: joaoDaSilva_ajude@gmail.com
+Senha: 123654
+
 ## Rotas e acesso a API
 
 Você pode ter acesso a documentação das rotas com os métodos utilizados no seguinte link: https://psoft-ajude.herokuapp.com/swagger-ui.html# 
