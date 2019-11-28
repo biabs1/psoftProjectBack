@@ -20,8 +20,8 @@ Segue link para vídeo demonstrativo da aplicação:https://youtu.be/-qGLa6BqiAs
 
 ## Quer testar a aplicação?
 Aqui está um usuário de teste para você ;)
-E-mail: joaoDaSilva_ajude@gmail.com
-Senha: 123654
+###### E-mail: joaoDaSilva_ajude@gmail.com
+###### Senha: 123654
 
 ## Rotas e acesso a API
 
