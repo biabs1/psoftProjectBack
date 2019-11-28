@@ -12,7 +12,11 @@ Java 1.8 ou superior
 Maven
 ```
 ## Deploy
-O link para deploy da aplicação está no link: https://psoft-ajude.herokuapp.com/
+O link para deploy da aplicação (apenas Backend) está no link: https://psoft-ajude.herokuapp.com/
+O link para deploy da aplicação (Backend + Frontend) está no link: http://ajude.netlify.com/
+
+## Vídeo demonstrativo
+Segue link para vídeo demonstrativo da aplicação:https://youtu.be/-qGLa6BqiAs
 
 ## Rotas e acesso a API
 
