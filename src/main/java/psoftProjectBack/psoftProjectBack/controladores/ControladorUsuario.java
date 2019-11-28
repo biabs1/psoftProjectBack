@@ -57,7 +57,7 @@ public class ControladorUsuario {
         msg.setTo(email);
 
         msg.setSubject("Boas Vindas ao AJuDE");
-        msg.setText("Olá, muito bem vindo(a) ao AJuDE!\n<a href=\"https://www.w3schools.com/html/\">Visite-nos</a>");
+        msg.setText("Olá, muito bem vindo(a) ao AJuDE!\n<a href=\"https://ajude.netlify.com/\">Visite-nos</a>");
 
         enviadorEmailJava.send(msg);
 
