@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
@@ -132,14 +133,27 @@ public class ServicoCampanha {
 
 	public List<Campanha> campanhasOrdenadasTop5(String criterio) {
 
+		List<Campanha> top5Campanhas;
+
 		if (criterio.equalsIgnoreCase("data")) {
-			return this.campanhasDAO.findTop10ByOrderByDeadline();
+			top5Campanhas = this.campanhasDAO.findAll(Sort.by("deadline").ascending());
+			return verificaTamanho(top5Campanhas);
 		} else if (criterio.equalsIgnoreCase("meta")) {
-			return this.campanhasDAO.findTop10ByOrderByMeta();
+			top5Campanhas = this.campanhasDAO.findAll(Sort.by("meta").ascending());
+			return verificaTamanho(top5Campanhas);
 		} else {
-			return this.campanhasDAO.findTop10ByOrderByCurtidas();
+			top5Campanhas = this.campanhasDAO.findAll(Sort.by("curtidas").ascending());
+			return verificaTamanho(top5Campanhas);
 		}
 
+	}
+
+	private List<Campanha> verificaTamanho(List<Campanha> top5Campanhas) {
+		if (top5Campanhas.size() <= 5) {
+			return top5Campanhas;
+		} else {
+			return top5Campanhas.subList(0, 5);
+		}
 	}
 
 	public List<Campanha> campanhasQueUsuarioDoou(String email) {
