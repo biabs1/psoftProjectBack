@@ -136,10 +136,10 @@ public class ServicoCampanha {
 		List<Campanha> top5Campanhas;
 
 		if (criterio.equalsIgnoreCase("data")) {
-			top5Campanhas = this.campanhasDAO.findAll(Sort.by("deadline").ascending());
+			top5Campanhas = this.campanhasDAO.findAll(Sort.by(Sort.Direction.ASC, "deadline"));
 			return verificaTamanho(top5Campanhas);
 		} else if (criterio.equalsIgnoreCase("meta")) {
-			top5Campanhas = this.campanhasDAO.findAll(Sort.by("meta").ascending());
+			top5Campanhas = this.campanhasDAO.findAll(Sort.by(Sort.Direction.ASC, "meta"));
 			return verificaTamanho(top5Campanhas);
 		} else {
 			top5Campanhas = this.campanhasDAO.findAll(Sort.by("curtidas").ascending());
