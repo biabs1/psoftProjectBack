@@ -10,13 +10,5 @@ import psoftProjectBack.psoftProjectBack.entidades.Campanha;
 public interface RepositorioCampanha<T, ID extends Serializable> extends JpaRepository<Campanha, Long> {
 
 	List<Campanha> findByNomeIgnoreCaseContaining(String nome);
-	
-	List<Campanha> findAllByOrderByDeadlineAsc();
-	
-	//List<Campanha> findTop5ByOrderByDeadline();
-	
-	List<Campanha> findTop5ByOrderByMeta();
-	
-	List<Campanha> findTop5ByOrderByCurtidas();
 
 }
