@@ -82,7 +82,11 @@ public class ServicoCampanha {
 
 	public Double quantoFalta(Long id) {
 		Campanha campanha = acessaCampanha(id).get();
-		return campanha.getMeta() - quantiaRecebida(campanha);
+		double quantoFaltaCalculado = campanha.getMeta() - quantiaRecebida(campanha);
+		if (quantoFaltaCalculado > 0)
+			return quantoFaltaCalculado;
+		else
+			return 0.0;
 	}
 
 	public boolean jaCurtiu(Campanha campanha, Usuario usuario) throws Exception {
