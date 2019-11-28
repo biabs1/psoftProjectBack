@@ -136,7 +136,7 @@ public class ServicoCampanha {
 		Comparator<Campanha> comp = null;
 
 		if (criterio.equalsIgnoreCase("data")) {
-			comp = new ComparadorData();
+			return this.campanhasDAO.findTop5ByOrderByDeadline();
 		} else if (criterio.equalsIgnoreCase("meta")) {
 			comp = new ComparadorMeta();
 		} else if (criterio.equalsIgnoreCase("like")) {
