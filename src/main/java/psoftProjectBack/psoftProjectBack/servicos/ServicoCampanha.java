@@ -160,9 +160,13 @@ public class ServicoCampanha {
 
 		List<Campanha> camps = new ArrayList<>();
 
-		for (int i = 0; i < recuperaTodasAsCampanhas().size(); i++) {
-			if (recuperaTodasAsCampanhas().get(i).getDoacoes().get(i).getQuemDoou().getEmail().equals(email)) {
-				camps.add(recuperaTodasAsCampanhas().get(i));
+		if (!recuperaTodasAsCampanhas().isEmpty()) {
+			for (int i = 0; i < recuperaTodasAsCampanhas().size(); i++) {
+				if (!recuperaTodasAsCampanhas().get(i).getDoacoes().isEmpty()) {
+					if (recuperaTodasAsCampanhas().get(i).getDoacoes().get(i).getQuemDoou().getEmail().equals(email)) {
+						camps.add(recuperaTodasAsCampanhas().get(i));
+					}
+				}
 			}
 		}
 		return camps;
