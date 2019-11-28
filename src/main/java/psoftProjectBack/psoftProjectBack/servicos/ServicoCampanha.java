@@ -2,17 +2,12 @@ package psoftProjectBack.psoftProjectBack.servicos;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import psoftProjectBack.psoftProjectBack.comparadores.ComparadorData;
-import psoftProjectBack.psoftProjectBack.comparadores.ComparadorLike;
-import psoftProjectBack.psoftProjectBack.comparadores.ComparadorMeta;
 import psoftProjectBack.psoftProjectBack.entidades.Campanha;
 import psoftProjectBack.psoftProjectBack.entidades.Comentario;
 import psoftProjectBack.psoftProjectBack.entidades.Curtida;
@@ -134,11 +129,11 @@ public class ServicoCampanha {
 	public List<Campanha> campanhasOrdenadasTop5(String criterio) {
 
 		if (criterio.equalsIgnoreCase("data")) {
-			return this.campanhasDAO.findTop5ByOrderByDeadline();
+			return this.campanhasDAO.findTop10ByOrderByDeadline();
 		} else if (criterio.equalsIgnoreCase("meta")) {
-			return this.campanhasDAO.findTop5ByOrderByMeta();
+			return this.campanhasDAO.findTop10ByOrderByMeta();
 		} else {
-			return this.campanhasDAO.findTop5ByOrderByCurtidas();
+			return this.campanhasDAO.findTop10ByOrderByCurtidas();
 		}
 
 	}
